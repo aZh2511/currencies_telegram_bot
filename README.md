@@ -15,7 +15,7 @@
 ### Technologies
 1. Docker
 2. PostgreSQL
-3. Deployed on the AWS ec-2
+3. Deployed on the GCP
 
 ***
 ### Task:
