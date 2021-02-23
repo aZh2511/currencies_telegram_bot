@@ -17,11 +17,17 @@ create unique index users_id_uindex
 
 CREATE TABLE IF NOT EXISTS currency
 (
-    curerncy text not null,
+    currency text not null,
     value real not null,
-    adding_date   timestamp,
     id serial not null
 );
 
 alter table users
     owner to postgres;
+
+
+CREATE TABLE IF NOT EXISTS last_request
+(
+    adding_date   timestamp,
+    id serial not null
+);

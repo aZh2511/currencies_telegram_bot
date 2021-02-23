@@ -7,4 +7,7 @@ async def check_time():
     now = datetime.now()
     last_request = await database.get_request_time()
     difference = timedelta(minutes=10)
-    return (now - last_request) >= difference
+    try:
+        return (now - last_request) >= difference
+    except TypeError:
+        return True

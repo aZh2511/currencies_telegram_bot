@@ -15,7 +15,8 @@ class DBCommands:
                    "VALUES ($1, $2, $3, $4)"
     COUNT_USERS = "SELECT COUNT (*) FROM users"
     GET_USERS = "SELECT (username, full_name) FROM users"
-    ADD_CURRENCY = "UPDATE currency SET value=$1 WHERE currency=$2"
+    UPDATE_CURRENCY = "UPDATE currency SET value=$1 WHERE currency=$2"
+    ADD_CURRENCY = "INSERT INTO currency (value, currency) VALUES ($1, $2)"
     GET_CURRENCIES = "SELECT (currency, value) FROM currency"
     GET_ID_REQUEST = "SELECT id FROM last_request"
     GET_TIME_REQUEST = "SELECT adding_date FROM last_request"
@@ -58,10 +59,14 @@ class DBCommands:
 
     async def add_currencies(self, data: dict):
         """Update currencies data in db."""
-        command = self.ADD_CURRENCY
-
-        for key in data:
-            await self.pool.fetchval(command, data.get(key), key)
+        command = self.UPDATE_CURRENCY
+        try:
+            for key in data:
+                await self.pool.fetchval(command, data.get(key), key)
+        except:
+            command = self.ADD_CURRENCY
+            for key in data:
+                await self.pool.fetchval(command, data.get(key), key)
 
     async def get_id_request(self):
         """Get the id of last request."""
