@@ -5,6 +5,9 @@
 2. /exchange 10 USD to EUR - calculate exchange.
 3. /history USD/EUR for 7 days - get history of exchange rate for certain period of time.
 
+## Not done
+1. pop-up warning in case of unavailable history for exchange. Due to telehram core pop-up can be caused in reply to callback_data, which comes with InlineButtons, but not Message-type.
+
 ### Used libraries:
 1. aiogram
 2. asyncpg
